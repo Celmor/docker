@@ -1,0 +1,21 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: "bridge"
+services:
+  vpn:
+    build: ${PWD}/
+    image: openvpn:0.1
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - "3128"
+    volumes:
+      - ${HOME}/secure/openvpn:/etc/openvpn
+    environment:
+      - user
+      - pass
+      - country="Germany"
