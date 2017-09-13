@@ -3,6 +3,6 @@ FROM debian
 WORKDIR /autovpn
 RUN apt-get update \
 	&& apt-get install -y golang-go git \
-COPY autovpn:autovpn
-RUN go build autovpn.go
+	&& git clone https://github.com/adtac/autovpn . \
+	&& go build autovpn.go
 ENTRYPOINT /autovpn/autovpn
