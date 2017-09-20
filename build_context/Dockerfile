@@ -6,4 +6,6 @@ RUN apt-get update -qq \
 	&& apt-get clean
 	&& git clone https://github.com/adtac/autovpn . \
 	&& go build autovpn.go
-ENTRYPOINT /autovpn/autovpn
+FROM debian
+COPY --from=0 /autovpn/autovpn /
+ENTRYPOINT /autovpn
