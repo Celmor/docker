@@ -8,4 +8,7 @@ RUN apt-get update -qq \
 	&& go build autovpn.go
 FROM debian
 COPY --from=0 /autovpn/autovpn /
+RUN apt-get update -qq \
+	&& apt-get install -qqy openvpn \
+	&& apt-get clean
 ENTRYPOINT /autovpn
